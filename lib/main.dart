@@ -30,11 +30,15 @@ class AttendanceScreen extends StatefulWidget {
 class _AttendanceScreenState extends State<AttendanceScreen> {
   late List<Student> students;
 
-  @override
+    @override
   void initState() {
     super.initState();
 
-    students = initialStudents
+    students = _copyInitialStudents();
+  }
+
+  List<Student> _copyInitialStudents() {
+    return initialStudents
         .map(
           (student) => Student(
             name: student.name,
@@ -62,15 +66,11 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
       }
     });
   }
-
   void resetStudents() {
     setState(() {
-      for (final student in students) {
-        student.present = false;
-      }
+      students = _copyInitialStudents();
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
